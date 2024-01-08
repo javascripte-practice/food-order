@@ -1,0 +1,27 @@
+.navbar {
+  background-color: rgba(208, 255, 0, 0.75);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ul-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+}
+
+.ul-links > li {
+  color: rgb(31, 11, 255);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.logo {
+  font-size: 30px;
+  color: blue;
+  font-weight: 700;
+}
