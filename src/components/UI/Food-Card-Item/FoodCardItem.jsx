@@ -2,32 +2,30 @@ import React from "react";
 import styles from "./FoodCardItem.module.css";
 import { useContext } from "react";
 import appContext from "../../../context/appContext";
+import { setKarzinka } from "../../../context/constants";
 const FoodCardItem = ({ data }) => {
   const ctx = useContext(appContext);
   const addKarzinka = (e) => {
     e.preventDefault();
-    const diff = ctx.karzinka?.filter((e) => e.name === data.name);
-    if (diff.length > 0) {
-      const newArr = ctx.karzinka?.map((e) => {
-        if (e.name === data.name) {
-          const newObj = {
-            ...e,
-            count: e.count + 1,
-          };
-          return newObj;
-        } else {
-          return e;
-        }
-      });
-      ctx.setKarzinka((prev) => {
-        return newArr;
-      });
-    } else {
-      const obj = { ...data, count: 1, id: Date.now().toString() };
-      ctx.setKarzinka((prev) => {
-        return [...prev, obj];
-      });
-    }
+    // const diff = ctx.karzinka?.filter((e) => e.name === data.name);
+    console.log(ctx.karzinka);
+    // if (diff.length > 0) {
+    //   const newArr = ctx.karzinka?.map((e) => {
+    //     if (e.name === data.name) {
+    //       const newObj = {
+    //         ...e,
+    //         count: e.count + 1,
+    //       };
+    //       return newObj;
+    //     } else {
+    //       return e;
+    //     }
+    //   });
+    //   ctx.setData(setKarzinka, newArr);
+    // } else {
+    const obj = { ...data, count: 1, id: Date.now().toString() };
+    ctx.setData(setKarzinka, obj);
+    // }
   };
   return (
     <div className={styles["card-box"]}>

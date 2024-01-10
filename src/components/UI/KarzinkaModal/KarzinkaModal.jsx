@@ -6,18 +6,15 @@ import appContext from "../../../context/appContext";
 const KarzinkaModal = (props) => {
   const ctx = useContext(appContext);
   const overalPrice = ctx.karzinka.reduce((acc, e) => {
-    const price = +e.price * e.count;
+    const price = +e?.price * e?.count;
     return acc + price;
   }, 0);
 
   const deleteOrder = (id) => {
-    ctx.setKarzinka((prev) => prev.filter((e) => e.id !== id));
-
-    console.log(id);
+    ctx.setKarzinka((prev) => prev?.filter((e) => e.id !== id));
   };
 
   const orderFood = (data) => {
-    console.log("Buyurtma qabul qilindi...", data);
     ctx.setKarzinka([]);
     props.isOpen();
     props.setOrder(true);
@@ -38,19 +35,19 @@ const KarzinkaModal = (props) => {
           <tbody className={styles["tbody"]}>
             {ctx.karzinka.map((p, i) => {
               return (
-                <tr key={p.id} className={styles["item"]}>
+                <tr key={p?.id} className={styles["item"]}>
                   <td>{i + 1}.</td>
                   <td>
                     {"  "}
-                    {p.name}
+                    {p?.name}
                     {"  "}
                   </td>
                   <td>
-                    {p.price} {" so'm"}
+                    {p?.price} {" so'm"}
                   </td>
-                  <td>{p.count}</td>
+                  <td>{p?.count}</td>
                   <td>
-                    <button onClick={deleteOrder.bind(null, p.id)}>del</button>
+                    <button onClick={deleteOrder.bind(null, p?.id)}>del</button>
                   </td>
                 </tr>
               );
