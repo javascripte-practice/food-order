@@ -3,11 +3,13 @@ import styles from "./Navbar.module.css";
 import appContext from "../../../context/appContext";
 import KarzinkaModal from "../../UI/KarzinkaModal/KarzinkaModal";
 import ModalProvider from "../../Modals/Modal";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [openKarzinka, setOpenKarzinka] = useState(false);
   const [order, setOrder] = useState(false);
-  const ctx = useContext(appContext);
+  // const ctx = useContext(appContext);
+  const { karzinka } = useSelector((state) => state);
   const isOpen = () => {
     setOpenKarzinka(!openKarzinka);
   };
@@ -31,7 +33,7 @@ const Navbar = () => {
         </ul>
         <div>
           <button className={`btn ${styles["karzinka-btn"]}`} onClick={isOpen}>
-            Karzinka {ctx.karzinka?.length}
+            Karzinka {karzinka?.length}
           </button>
         </div>
       </div>

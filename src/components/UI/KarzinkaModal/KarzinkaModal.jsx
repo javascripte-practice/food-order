@@ -2,20 +2,24 @@ import React, { useCallback, useContext, useState } from "react";
 import styles from "./KarzinkaModal.module.css";
 import ModalProvider from "../../Modals/Modal";
 import appContext from "../../../context/appContext";
+import { useDispatch, useSelector } from "react-redux";
+import { delKarzinka } from "../../../context/constants";
 
 const KarzinkaModal = (props) => {
-  const ctx = useContext(appContext);
-  const overalPrice = ctx.karzinka.reduce((acc, e) => {
+  // const ctx = useContext(appContext);
+  const { karzinka } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const overalPrice = karzinka.reduce((acc, e) => {
     const price = +e?.price * e?.count;
     return acc + price;
   }, 0);
 
   const deleteOrder = (id) => {
-    ctx.setKarzinka((prev) => prev?.filter((e) => e.id !== id));
+    dispatch({ type: delKarzinka, payload: id });
   };
 
   const orderFood = (data) => {
-    ctx.setKarzinka([]);
+    dispatch({ type: delKarzinka, payload: false });
     props.isOpen();
     props.setOrder(true);
   };
@@ -33,7 +37,7 @@ const KarzinkaModal = (props) => {
             </tr>
           </thead>
           <tbody className={styles["tbody"]}>
-            {ctx.karzinka.map((p, i) => {
+            {karzinka.map((p, i) => {
               return (
                 <tr key={p?.id} className={styles["item"]}>
                   <td>{i + 1}.</td>
@@ -59,8 +63,8 @@ const KarzinkaModal = (props) => {
             {"Umumiy "} <strong>{overalPrice.toFixed(3)}</strong> {" so'm"}
           </span>
           <button
-            onClick={orderFood.bind(null, ctx.karzinka)}
-            disabled={ctx.karzinka.length > 0 ? false : true}
+            onClick={orderFood.bind(null, karzinka)}
+            disabled={karzinka.length > 0 ? false : true}
           >
             Buyurtma berish
           </button>

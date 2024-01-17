@@ -1,14 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Login.module.css";
-import appContext from "../../context/appContext";
+// import appContext from "../../context/appContext";
 import { onLogin } from "../../context/constants";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const ctx = useContext(appContext);
+  // const ctx = useContext(appContext);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const changePassword = (e) => {
@@ -24,10 +27,11 @@ const Login = () => {
       login: login.trim(),
       password: password.trim(),
     };
-    ctx.setData(onLogin, data);
-    navigate("/home");
+    // ctx.setData(onLogin, data);
+    dispatch({ type: onLogin, payload: data });
     setLogin("");
     setPassword("");
+    navigate("/home");
   };
 
   return (

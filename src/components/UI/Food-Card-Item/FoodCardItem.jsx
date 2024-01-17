@@ -2,36 +2,25 @@ import React from "react";
 import styles from "./FoodCardItem.module.css";
 import { useContext } from "react";
 import appContext from "../../../context/appContext";
+import { useDispatch, useSelector } from "react-redux";
 import { setKarzinka } from "../../../context/constants";
+// import { setKarzinka } from "../../../context/constants";
 const FoodCardItem = ({ data }) => {
-  const ctx = useContext(appContext);
+  // const ctx = useContext(appContext);
+  const { isVerify, karzinka } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const addKarzinka = (e) => {
     e.preventDefault();
-    // const diff = ctx.karzinka?.filter((e) => e.name === data.name);
-    console.log(ctx.karzinka);
-    // if (diff.length > 0) {
-    //   const newArr = ctx.karzinka?.map((e) => {
-    //     if (e.name === data.name) {
-    //       const newObj = {
-    //         ...e,
-    //         count: e.count + 1,
-    //       };
-    //       return newObj;
-    //     } else {
-    //       return e;
-    //     }
-    //   });
-    //   ctx.setData(setKarzinka, newArr);
-    // } else {
     const obj = { ...data, count: 1, id: Date.now().toString() };
-    ctx.setData(setKarzinka, obj);
-    // }
+    // ctx.setData(setKarzinka, obj);
+    dispatch({ type: setKarzinka, payload: obj });
   };
   return (
     <div className={styles["card-box"]}>
       <div className={styles["food-img"]}>
         <img src={data.img} alt="" />
       </div>
+      {isVerify && <p>Hello</p>}
       <p className={styles["food-name"]}>{data.name}</p>
       <div>
         <p className={styles["food-price"]}>{data.price} so'm</p>
