@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styles from "./FoodCardItem.module.css";
-import { useContext } from "react";
-import appContext from "../../../context/appContext";
 import { useDispatch, useSelector } from "react-redux";
-import { setKarzinka } from "../../../context/constants";
+import { setKarzinka } from "../../../redux-toolkit/foodOrderSlice";
 // import { setKarzinka } from "../../../context/constants";
 const FoodCardItem = ({ data }) => {
   // const ctx = useContext(appContext);
-  const { isVerify, karzinka } = useSelector((state) => state);
+  const { isVerify } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const addKarzinka = (e) => {
+  const addKarzinka = useCallback((e) => {
     e.preventDefault();
     const obj = { ...data, count: 1, id: Date.now().toString() };
+    dispatch(setKarzinka(obj));
+    // dispatch({ type: setKarzinka, payload: obj });
     // ctx.setData(setKarzinka, obj);
-    dispatch({ type: setKarzinka, payload: obj });
-  };
+  });
   return (
     <div className={styles["card-box"]}>
       <div className={styles["food-img"]}>

@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const datas = Object.entries(data);
   // const ctx = useContext(appContext);
-
-  const isVerify = useSelector((state) => state.isVerify);
+  const { isVerify } = useSelector((state) => state);
+  console.log(isVerify);
   return (
     <Layout>
       {isVerify &&
@@ -18,4 +18,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);

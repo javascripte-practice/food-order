@@ -1,9 +1,8 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./KarzinkaModal.module.css";
 import ModalProvider from "../../Modals/Modal";
-import appContext from "../../../context/appContext";
 import { useDispatch, useSelector } from "react-redux";
-import { delKarzinka } from "../../../context/constants";
+import { delKarzinka } from "../../../redux-toolkit/foodOrderSlice";
 
 const KarzinkaModal = (props) => {
   // const ctx = useContext(appContext);
@@ -15,11 +14,13 @@ const KarzinkaModal = (props) => {
   }, 0);
 
   const deleteOrder = (id) => {
-    dispatch({ type: delKarzinka, payload: id });
+    // dispatch({ type: delKarzinka, payload: { id } });
+    dispatch(delKarzinka(id));
   };
 
   const orderFood = (data) => {
-    dispatch({ type: delKarzinka, payload: false });
+    // dispatch({ type: delKarzinka });
+    dispatch(delKarzinka());
     props.isOpen();
     props.setOrder(true);
   };

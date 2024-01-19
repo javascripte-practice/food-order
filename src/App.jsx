@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 
 function App() {
   // const ctx = useContext(appContext);
-  const isVerify = useSelector((state) => state.isVerify);
+  // const { isVerify } = useSelector((state) => state);
+  const { isVerify } = useSelector((state) => state);
+
   return (
     <>
       {/* <Routes>
